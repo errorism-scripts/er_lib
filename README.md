@@ -7,8 +7,6 @@ A FiveM library and resource implementing reusable modules, methods, and UI elem
 ![](https://img.shields.io/github/contributors/errorism-scripts/er_lib?logo=github)
 ![](https://img.shields.io/github/v/release/errorism-scripts/er_lib?logo=github)
 
-For guidelines to contributing to the project, and to see our Contributor License Agreement, see [CONTRIBUTING.md](./CONTRIBUTING.md)
-
 For additional legal notices, refer to [NOTICE.md](./NOTICE.md).
 
 ## Fork Purpose

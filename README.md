@@ -20,7 +20,7 @@ https://overextended.dev/ox_lib
 
 ## 💾 Download
 
-https://github.com/errorism-scripts/er_lib/releases/latest/download/ox_lib.zip
+https://github.com/errorism-scripts/er_lib/releases/latest/download/er_lib.zip
 
 
 ## 🖥️ Lua Language Server

@@ -1,9 +1,9 @@
 import { cache } from '../cache';
 
 const pendingCallbacks: Record<string, (...args: any[]) => void> = {};
-const callbackTimeout = GetConvarInt('ox:callbackTimeout', 300000);
+const callbackTimeout = GetConvarInt('er:callbackTimeout', 300000);
 
-onNet(`__ox_cb_${cache.resource}`, (key: string, ...args: any) => {
+onNet(`__er_cb_${cache.resource}`, (key: string, ...args: any) => {
   if (!source) return;
 
   const resolve = pendingCallbacks[key];
@@ -42,8 +42,8 @@ export function triggerServerCallback<T = unknown>(
     key = `${eventName}:${Math.floor(Math.random() * (100000 + 1))}`;
   } while (pendingCallbacks[key]);
 
-  emitNet(`er_lib:validateCallback`, eventName, cache.resource, key);
-  emitNet(`__ox_cb_${eventName}`, cache.resource, key, ...args);
+  // emitNet(`er_lib:validateCallback`, eventName, cache.resource, key);
+  emitNet(`__er_cb_${eventName}`, cache.resource, key, ...args);
 
   return new Promise<T>((resolve, reject) => {
     pendingCallbacks[key] = (args) => {
@@ -59,7 +59,7 @@ export function triggerServerCallback<T = unknown>(
 export function onServerCallback(eventName: string, cb: (...args: any[]) => any) {
   exports.er_lib.setValidCallback(eventName, true);
 
-  onNet(`__ox_cb_${eventName}`, async (resource: string, key: string, ...args: any[]) => {
+  onNet(`__er_cb_${eventName}`, async (resource: string, key: string, ...args: any[]) => {
     let response: any;
 
     try {
@@ -69,6 +69,6 @@ export function onServerCallback(eventName: string, cb: (...args: any[]) => any)
       console.log(`^3${e.stack}^0`);
     }
 
-    emitNet(`__ox_cb_${resource}`, key, response);
+    emitNet(`__er_cb_${resource}`, key, response);
   });
 }

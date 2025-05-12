@@ -56,7 +56,7 @@ function lib.isCallbackValid(callbackName)
   return registeredCallbacks[callbackName] == GetInvokingResource() or cache.resource
 end
 
-local cbEvent = '__ox_cb_%s'
+local cbEvent = '__er_cb_%s'
 
 RegisterNetEvent('er_lib:validateCallback', function(callbackName, invokingResource, key)
   if registeredCallbacks[callbackName] then return end

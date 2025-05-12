@@ -7,8 +7,8 @@
 ]]
 
 local pendingCallbacks = {}
-local cbEvent = '__ox_cb_%s'
-local callbackTimeout = GetConvarInt('ox:callbackTimeout', 300000)
+local cbEvent = '__er_cb_%s'
+local callbackTimeout = GetConvarInt('er:callbackTimeout', 300000)
 
 RegisterNetEvent(cbEvent:format(cache.resource), function(key, ...)
   local cb = pendingCallbacks[key]
@@ -35,7 +35,7 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
     key = ('%s:%s:%s'):format(event, math.random(0, 100000), playerId)
   until not pendingCallbacks[key]
 
-  TriggerClientEvent('er_lib:validateCallback', playerId, event, cache.resource, key)
+  -- TriggerClientEvent('er_lib:validateCallback', playerId, event, cache.resource, key)
   TriggerClientEvent(cbEvent:format(event), playerId, cache.resource, key, ...)
 
   ---@type promise | false

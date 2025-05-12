@@ -57,7 +57,7 @@ function loadLocale(key: string): typeof dict {
 }
 
 export const initLocale = (key?: string) => {
-  const lang = key || exports.ox_lib.getLocaleKey();
+  const lang = key || exports.er_lib.getLocaleKey();
   let locales = loadLocale('en');
 
   if (lang !== 'en') Object.assign(locales, loadLocale(lang));

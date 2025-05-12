@@ -10,15 +10,15 @@ type RadialItem = {
   iconHeight?: number;
 };
 
-export const addRadialItem = (items: RadialItem | RadialItem[]) => exports.ox_lib.addRadialItem(items);
+export const addRadialItem = (items: RadialItem | RadialItem[]) => exports.er_lib.addRadialItem(items);
 
-export const removeRadialItem = (item: string) => exports.ox_lib.removeRadialItem(item);
+export const removeRadialItem = (item: string) => exports.er_lib.removeRadialItem(item);
 
 export const registerRadial = (radial: { id: string; items: Omit<RadialItem, 'id'>[] }) =>
-  exports.ox_lib.registerRadial(radial);
+  exports.er_lib.registerRadial(radial);
 
-export const getCurrentRadialId = () => exports.ox_lib.getCurrentRadialId();
+export const getCurrentRadialId = () => exports.er_lib.getCurrentRadialId();
 
-export const hideRadial = () => exports.ox_lib.hideRadial();
+export const hideRadial = () => exports.er_lib.hideRadial();
 
-export const disableRadial = (state: boolean) => exports.ox_lib.disableRadial(state);
+export const disableRadial = (state: boolean) => exports.er_lib.disableRadial(state);

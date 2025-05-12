@@ -32,13 +32,13 @@ interface MenuProps {
 }
 
 type registerMenu = (data: MenuProps, cb: ChangeFunction) => void;
-export const registerMenu: registerMenu = (data, cb) => exports.ox_lib.registerMenu(data, cb);
+export const registerMenu: registerMenu = (data, cb) => exports.er_lib.registerMenu(data, cb);
 
-export const showMenu = (id: string): string => exports.ox_lib.showMenu(id);
+export const showMenu = (id: string): string => exports.er_lib.showMenu(id);
 
-export const hideMenu = (onExit: boolean): void => exports.ox_lib.hideMenu(onExit);
+export const hideMenu = (onExit: boolean): void => exports.er_lib.hideMenu(onExit);
 
-export const getOpenMenu = (): string | null => exports.ox_lib.getOpenMenu();
+export const getOpenMenu = (): string | null => exports.er_lib.getOpenMenu();
 
 type setMenuOptions = (id: string, options: MenuOptions | MenuOptions[], index?: number) => void;
-export const setMenuOptions: setMenuOptions = (id, options, index) => exports.ox_lib.setMenuOptions(id, options, index);
+export const setMenuOptions: setMenuOptions = (id, options, index) => exports.er_lib.setMenuOptions(id, options, index);

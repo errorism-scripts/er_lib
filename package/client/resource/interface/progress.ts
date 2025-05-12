@@ -46,10 +46,10 @@ interface ProgressbarProps extends Omit<ProgressProps, 'position'> {
   label: string;
 }
 
-export const progressBar = async (data: ProgressbarProps): Promise<boolean> => exports.ox_lib.progressBar(data);
+export const progressBar = async (data: ProgressbarProps): Promise<boolean> => exports.er_lib.progressBar(data);
 
-export const progressCircle = async (data: ProgressProps): Promise<boolean> => exports.ox_lib.progressCircle(data);
+export const progressCircle = async (data: ProgressProps): Promise<boolean> => exports.er_lib.progressCircle(data);
 
-export const progressActive = (): boolean => exports.ox_lib.progressActive();
+export const progressActive = (): boolean => exports.er_lib.progressActive();
 
-export const cancelProgress = (): void => exports.ox_lib.cancelProgress();
+export const cancelProgress = (): void => exports.er_lib.cancelProgress();

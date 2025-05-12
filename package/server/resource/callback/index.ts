@@ -24,7 +24,7 @@ export function triggerClientCallback<T = unknown>(
     key = `${eventName}:${Math.floor(Math.random() * (100000 + 1))}:${playerId}`;
   } while (pendingCallbacks[key]);
 
-  emitNet(`ox_lib:validateCallback`, playerId, eventName, cache.resource, key);
+  emitNet(`er_lib:validateCallback`, playerId, eventName, cache.resource, key);
   emitNet(`__ox_cb_${eventName}`, playerId, cache.resource, key, ...args);
 
   return new Promise<T>((resolve, reject) => {
@@ -39,7 +39,7 @@ export function triggerClientCallback<T = unknown>(
 }
 
 export function onClientCallback(eventName: string, cb: (playerId: number, ...args: any[]) => any) {
-  exports.ox_lib.setValidCallback(eventName, true)
+  exports.er_lib.setValidCallback(eventName, true);
 
   onNet(`__ox_cb_${eventName}`, async (resource: string, key: string, ...args: any[]) => {
     const src = source;

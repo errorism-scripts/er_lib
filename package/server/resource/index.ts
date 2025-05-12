@@ -7,5 +7,5 @@ export * from './version';
 export * from './addCommand';
 
 export function setVehicleProperties(vehicle: number, props: VehicleProperties) {
-  Entity(vehicle).state.set('ox_lib:setVehicleProperties', props, true)
+  Entity(vehicle).state.set('er_lib:setVehicleProperties', props, true);
 }

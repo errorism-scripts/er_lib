@@ -42,7 +42,7 @@ export function triggerServerCallback<T = unknown>(
     key = `${eventName}:${Math.floor(Math.random() * (100000 + 1))}`;
   } while (pendingCallbacks[key]);
 
-  emitNet(`ox_lib:validateCallback`, eventName, cache.resource, key);
+  emitNet(`er_lib:validateCallback`, eventName, cache.resource, key);
   emitNet(`__ox_cb_${eventName}`, cache.resource, key, ...args);
 
   return new Promise<T>((resolve, reject) => {
@@ -57,7 +57,7 @@ export function triggerServerCallback<T = unknown>(
 }
 
 export function onServerCallback(eventName: string, cb: (...args: any[]) => any) {
-  exports.ox_lib.setValidCallback(eventName, true)
+  exports.er_lib.setValidCallback(eventName, true);
 
   onNet(`__ox_cb_${eventName}`, async (resource: string, key: string, ...args: any[]) => {
     let response: any;

@@ -23,7 +23,7 @@ export const cache: OxCache = new Proxy(
 
       cacheEvents[key] = [];
 
-      AddEventHandler(`ox_lib:cache:${key}`, (value: any) => {
+      AddEventHandler(`er_lib:cache:${key}`, (value: any) => {
         const oldValue = target[key];
         const events = cacheEvents[key];
 
@@ -32,7 +32,7 @@ export const cache: OxCache = new Proxy(
         target[key] = value;
       });
 
-      target[key] = exports.ox_lib.cache(key) || false;
+      target[key] = exports.er_lib.cache(key) || false;
       return target[key];
     },
   }

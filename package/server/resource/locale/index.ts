@@ -1,1 +1,1 @@
-export const getServerLocale = (): string => exports.ox_lib.getServerLocale();
+export const getServerLocale = (): string => exports.er_lib.getServerLocale();

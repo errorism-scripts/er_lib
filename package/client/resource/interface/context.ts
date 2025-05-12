@@ -40,10 +40,10 @@ interface ContextMenuProps {
 }
 
 type registerContext = (context: ContextMenuProps | ContextMenuProps[]) => void;
-export const registerContext: registerContext = (context) => exports.ox_lib.registerContext(context);
+export const registerContext: registerContext = (context) => exports.er_lib.registerContext(context);
 
-export const showContext = (id: string): void => exports.ox_lib.showContext(id);
+export const showContext = (id: string): void => exports.er_lib.showContext(id);
 
-export const hideContext = (onExit: boolean): void => exports.ox_lib.hideContext(onExit);
+export const hideContext = (onExit: boolean): void => exports.er_lib.hideContext(onExit);
 
-export const getOpenContextMenu = (): string | null => exports.ox_lib.getOpenContextMenu();
+export const getOpenContextMenu = (): string | null => exports.er_lib.getOpenContextMenu();

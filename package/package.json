@@ -1,8 +1,8 @@
 {
-  "name": "@overextended/ox_lib",
+  "name": "@errorism-scripts/er_lib",
   "author": "Overextended",
   "version": "1.0.0",
-  "description": "JS/TS wrapper for ox_lib exports",
+  "description": "JS/TS wrapper for er_lib exports",
   "main": "./shared/index.js",
   "types": "./shared/index.d.ts",
   "sideEffects": ["./shared/resource/locale/index.js"],
@@ -13,15 +13,13 @@
   "keywords": [
     "fivem",
     "ox_lib",
+    "er_lib",
     "ox",
     "overextended"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/overextended/ox_lib.git"
-  },
-  "bugs": {
-    "url": "https://github.com/overextended/ox_lib/issues"
+    "url": "git+https://github.com/errorism-scripts/er_lib.git"
   },
   "license": "LGPL-3.0",
   "dependencies": {

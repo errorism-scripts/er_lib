@@ -28,8 +28,8 @@ export class Dui {
     this.id = id;
     this.debug = data.debug || false;
     this.url = data.url;
-    this.dictName = `ox_lib_dui_dict_${id}`;
-    this.txtName = `ox_lib_dui_txt_${id}`;
+    this.dictName = `er_lib_dui_dict_${id}`;
+    this.txtName = `er_lib_dui_txt_${id}`;
     this.duiObject = CreateDui(data.url, data.width, data.height);
     this.duiHandle = GetDuiHandle(this.duiObject);
     this.runtimeTxd = CreateRuntimeTxd(this.dictName);

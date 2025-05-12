@@ -26,10 +26,10 @@ interface NotifyProps {
   iconColor?: string;
   iconAnimation?: IconAnimation;
   alignIcon?: 'top' | 'center';
-  sound?: { bank?: string; set: string; name: string };  
+  sound?: { bank?: string; set: string; name: string };
 }
 
-export const notify = (data: NotifyProps): void => exports.ox_lib.notify(data);
+export const notify = (data: NotifyProps): void => exports.er_lib.notify(data);
 
 // Keep for backwards compat with v2
 interface DefaultNotifyProps {
@@ -41,4 +41,4 @@ interface DefaultNotifyProps {
   id?: number;
 }
 
-export const defaultNotify = (data: DefaultNotifyProps): void => exports.ox_lib.defaultNotify(data);
+export const defaultNotify = (data: DefaultNotifyProps): void => exports.er_lib.defaultNotify(data);

@@ -1,9 +1,11 @@
-# ox_lib JS/TS wrapper
+# er_lib JS/TS wrapper
 
-Not all ox_lib functions found in Lua are supported, the ones that are will have a JS/TS example
+Not all er_lib functions found in Lua are supported, the ones that are will have a JS/TS example
 on the documentation.
 
-You still need to use and have the ox_lib resource included into the resource you are using the npm package in.
+You still need to use and have the er_lib resource included into the resource you are using the npm package in.
+
+But in THIS fork new feature will be added only in lua, so we recommend to use the ox_lib original version
 
 ## Installation
 

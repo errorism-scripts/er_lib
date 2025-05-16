@@ -222,7 +222,7 @@ _ENV.lib = lib
 _ENV.cache = cache
 _ENV.require = lib.require
 
-local notifyEvent = ('__ox_notify_%s'):format(cache.resource)
+local notifyEvent = ('__er_notify_%s'):format(cache.resource)
 
 if context == 'client' then
   RegisterNetEvent(notifyEvent, function(data)

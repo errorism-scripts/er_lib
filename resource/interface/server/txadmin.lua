@@ -6,7 +6,7 @@
     Copyright © 2025 Linden <https://github.com/thelindat>
 ]]
 
-if GetConvarInt('ox:txAdminNotifications', 0) == 0 then return end
+if GetConvarInt('er:txAdminNotifications', 0) == 0 then return end
 
 if GetConvarInt('txAdmin-hideDefaultAnnouncement', 0) == 1 then
   AddEventHandler('txAdmin:events:announcement', function(eventData)

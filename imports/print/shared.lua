@@ -22,10 +22,13 @@ local levelPrefixes = {
     '^4[VERBOSE]',
     '^6[DEBUG]',
 }
-local convarGlobal = 'ox:printlevel'
-local convarResource = 'ox:printlevel:' .. cache.resource
+local convarGlobal = 'er:printlevel'
+local convarResource = 'er:printlevel:' .. cache.resource
+
+local convarGlobalOx = 'ox:printlevel'
+local convarResourceOx = 'ox:printlevel:' .. cache.resource
 local function getPrintLevelFromConvar()
-    return printLevel[GetConvar(convarResource, GetConvar(convarGlobal, 'info'))]
+    return printLevel[GetConvar(convarResource, GetConvar(convarResourceOx, GetConvar(convarGlobal, GetConvar(convarGlobalOx, 'info'))))]
 end
 local resourcePrintLevel = getPrintLevelFromConvar()
 local template = ('^5[%s] %%s %%s^7'):format(cache.resource)
@@ -35,8 +38,8 @@ local function handleException(reason, value)
 end
 local jsonOptions = { sort_keys = true, indent = true, exception = handleException }
 
----Prints to console conditionally based on what ox:printlevel is.
----Any print with a level more severe will also print. If ox:printlevel is info, then warn and error prints will appear as well, but debug prints will not.
+---Prints to console conditionally based on what er:printlevel is.
+---Any print with a level more severe will also print. If er:printlevel is info, then warn and error prints will appear as well, but debug prints will not.
 ---@param level PrintLevel
 ---@param ... any
 local function libPrint(level, ...)
@@ -62,8 +65,13 @@ lib.print = {
 
 -- Update the print level when the convar changes
 if (AddConvarChangeListener) then
-    AddConvarChangeListener('ox:printlevel*', function(convarName, reserved)
+    AddConvarChangeListener('er:printlevel*', function(convarName, reserved)
         if (convarName ~= convarResource and convarName ~= convarGlobal) then return end
+        resourcePrintLevel = getPrintLevelFromConvar()
+    end)
+
+    AddConvarChangeListener('ox:printlevel*', function(convarName, reserved)
+        if (convarName ~= convarResourceOx and convarName ~= convarGlobalOx) then return end
         resourcePrintLevel = getPrintLevelFromConvar()
     end)
 else

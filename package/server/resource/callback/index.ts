@@ -1,7 +1,7 @@
 import { cache } from '../cache';
 
 const pendingCallbacks: Record<string, (...args: any[]) => void> = {};
-const callbackTimeout = GetConvarInt('er:callbackTimeout', 300000);
+const callbackTimeout = GetConvarInt('er:callbackTimeout', GetConvarInt('ox:callbackTimeout', 300000));
 
 onNet(`__er_cb_${cache.resource}`, (key: string, ...args: any) => {
   const resolve = pendingCallbacks[key];

@@ -9,7 +9,7 @@
 local pendingCallbacks = {}
 local timers = {}
 local cbEvent = '__er_cb_%s'
-local callbackTimeout = GetConvarInt('er:callbackTimeout', 300000)
+local callbackTimeout = GetConvarInt('er:callbackTimeout', GetConvarInt('ox:callbackTimeout', 300000))
 
 RegisterNetEvent(cbEvent:format(cache.resource), function(key, ...)
   if source == '' then return end

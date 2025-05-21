@@ -7,5 +7,5 @@
 ]]
 
 function lib.getLocaleKey()
-  return GetConvar('er:locale', 'en')
+  return GetConvar('er:locale', GetConvar('ox:locale', 'en'))
 end

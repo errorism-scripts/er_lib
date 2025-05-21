@@ -18,12 +18,12 @@ local function safeGetKvp(fn, key, default)
 end
 
 local settings = {
-  default_locale = GetConvar('er:locale', 'en'),
+  default_locale = GetConvar('er:locale', GetConvar('ox:locale', 'en')),
   notification_position = safeGetKvp(GetResourceKvpString, 'notification_position', 'top-right'),
   notification_audio = safeGetKvp(GetResourceKvpInt, 'notification_audio') == 1,
 }
 
-local userLocales = GetConvarInt('er:userLocales', 1) == 1
+local userLocales = GetConvarInt('er:userLocales', GetConvarInt('ox:userLocales', 1)) == 1
 
 settings.locale = userLocales and safeGetKvp(GetResourceKvpString, 'locale') or settings.default_locale
 

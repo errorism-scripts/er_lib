@@ -16,6 +16,7 @@ import RadialMenu from './features/menu/radial';
 import { theme } from './theme';
 import { MantineProvider } from '@mantine/core';
 import { useConfig } from './providers/ConfigProvider';
+import { time } from 'node:console';
 
 const App: React.FC = () => {
 	const { config } = useConfig();
@@ -26,24 +27,26 @@ const App: React.FC = () => {
 
 	function toLibTimeDate(dt = new Date()) {
 		const year = dt.getFullYear();
-		const month = dt.getMonth() + 1;      // getMonth() is 0–11
-		const day = dt.getDate();           // 1–31
-		const hour = dt.getHours();          // 0–23
-		const min = dt.getMinutes();        // 0–59
-		const sec = dt.getSeconds();        // 0–59
+		const month = dt.getMonth() + 1;
+		const day = dt.getDate();
+		const hour = dt.getHours();
+		const min = dt.getMinutes();
+		const sec = dt.getSeconds();
 
-		// JS getDay(): 0 = Sunday, …, 6 = Saturday
-		const wday = dt.getDay() + 1;         // 1 = Sunday, …, 7 = Saturday
+		const wday = dt.getDay() + 1;
 
-		// Day-of-year: diff from Jan 1st, in ms, / ms per day + 1
 		const start = new Date(year, 0, 1);
 		const diff = dt.getTime() - start.getTime();      // ← use getTime()
 		const yday = Math.floor(diff / 86_400_000) + 1;
-
-		return { wday, yday, year, month, day, hour, min, sec };
+		const timestamp = Math.floor(dt.getTime() / 1000);
+		return { wday, yday, year, month, day, hour, min, sec, timestamp };
 	}
 
-	fetchNui('time_on_connect', toLibTimeDate());
+
+	useNuiEvent('get_time', () => {
+		fetchNui('time_callback', toLibTimeDate());
+	});
+
 	fetchNui('init');
 
 	return (

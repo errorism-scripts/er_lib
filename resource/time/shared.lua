@@ -7,6 +7,7 @@
 ---@field hour number
 ---@field min number
 ---@field sec number
+---@field timestamp number
 
 local context = IsDuplicityVersion()
 
@@ -17,6 +18,7 @@ Time.__index = Time
 
 function Time.new()
   local self = setmetatable({}, Time)
+  self.on_connect = self:get_current()
   return self
 end
 
@@ -27,10 +29,15 @@ end
 ---@return lib.time.date
 function Time:get_current()
   if context then
-    return os.date '*t' --[[@as lib.time.date]]
+    local date = os.date '*t' --[[@as lib.time.date]]
+    date.timestamp = os.time()
+    return date
   end
 
   local p = promise.new()
+  SendNUIMessage {
+    action = 'get_time',
+  }
   RegisterRawNuiCallback('time_callback', function(data, cb)
     p:resolve(data)
     cb(true)

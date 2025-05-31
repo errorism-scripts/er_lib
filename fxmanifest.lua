@@ -6,7 +6,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 name 'er_lib'
 author 'Overextended, Fork by Errorism'
-version '1.3.1'
+version '1.4.1'
 license 'LGPL-3.0-or-later'
 repository 'https://github.com/errorism-scripts/er_lib'
 description 'A library of shared functions to utilise in other resources.'
@@ -43,6 +43,7 @@ client_scripts {
 server_scripts {
   'imports/callback/server.lua',
   'imports/uuid/shared.lua',
+  'imports/base62/shared.lua',
   'imports/getFilesInDirectory/server.lua',
   'resource/**/server.lua',
   'resource/**/server/*.lua',

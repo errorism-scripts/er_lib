@@ -127,26 +127,42 @@ local markerTypesMap = {
 local function drawMarker(self)
   DrawMarker(
     self.type,
-    self.coords.x, self.coords.y, self.coords.z,
-    self.direction.x, self.direction.y, self.direction.z,
-    self.rotation.x, self.rotation.y, self.rotation.z,
-    self.width, self.width, self.height,
-    self.color.r, self.color.g, self.color.b, self.color.a,
-    self.bobUpAndDown, self.faceCamera, 2, self.rotate, self.textureDict, self.textureName, false)
+    self.coords.x,
+    self.coords.y,
+    self.coords.z,
+    self.direction.x,
+    self.direction.y,
+    self.direction.z,
+    self.rotation.x,
+    self.rotation.y,
+    self.rotation.z,
+    self.width,
+    self.width,
+    self.height,
+    self.color.r,
+    self.color.g,
+    self.color.b,
+    self.color.a,
+    self.bobUpAndDown,
+    self.faceCamera,
+    2,
+    self.rotate,
+    self.textureDict,
+    self.textureName,
+    false
+  )
 end
 
 ---@param options MarkerProps
 function lib.marker.new(options)
   local markerType
-  if type(options.type) == "string" then
+  if type(options.type) == 'string' then
     markerType = markerTypesMap[options.type]
-    if markerType == nil then
-      error(("unknown marker type '%s'"):format(options.type))
-    end
-  elseif type(options.type) == "number" then
+    if markerType == nil then error(('unknown marker type \'%s\''):format(options.type)) end
+  elseif type(options.type) == 'number' then
     markerType = options.type
   else
-    error(("expected marker type to have type 'string' or 'number' (received %s)"):format(type(options.type)))
+    error(('expected marker type to have type \'string\' or \'number\' (received %s)'):format(type(options.type)))
   end
 
   local self = {}

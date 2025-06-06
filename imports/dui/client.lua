@@ -54,6 +54,7 @@ function lib.dui:constructor(data)
 end
 
 function lib.dui:remove()
+  if not self.private.id then return end
   SetDuiUrl(self.duiObject, 'about:blank')
   DestroyDui(self.duiObject)
   duis[self.private.id] = nil

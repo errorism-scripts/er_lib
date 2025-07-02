@@ -3,3 +3,5 @@ local wday = lib.weekday()
 function lib.isWeekend()
   return wday == 0 or wday == 6
 end
+
+return lib.isWeekend

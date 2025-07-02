@@ -2,3 +2,5 @@
 function lib.weekday()
   return os.date('%w', os.time())
 end
+
+return lib.weekday

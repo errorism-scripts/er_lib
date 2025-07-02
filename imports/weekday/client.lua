@@ -6,3 +6,5 @@ local wday = tonumber(decompressd:sub(11, 11))
 function lib.weekday()
   return wday
 end
+
+return lib.weekday

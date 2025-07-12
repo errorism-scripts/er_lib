@@ -7,6 +7,7 @@
 ]]
 
 function lib.checkDependency(resource, minimumVersion, printMessage)
+  if resource == 'ox_lib' then return true end
   local currentVersion = GetResourceMetadata(resource, 'version', 0)
   currentVersion = currentVersion and currentVersion:match '%d+%.%d+%.%d+' or 'unknown'
 

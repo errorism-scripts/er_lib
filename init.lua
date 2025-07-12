@@ -287,3 +287,13 @@ for i = 1, GetNumResourceMetadata(cache.resource, 'er_lib') do
     if type(module) == 'function' then pcall(module) end
   end
 end
+
+for i = 1, GetNumResourceMetadata(cache.resource, 'ox_lib') do
+  local name = GetResourceMetadata(cache.resource, 'ox_lib', i - 1)
+
+  if not rawget(lib, name) then
+    local module = loadModule(lib, name)
+
+    if type(module) == 'function' then pcall(module) end
+  end
+end

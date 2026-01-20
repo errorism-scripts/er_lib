@@ -109,7 +109,20 @@ end
 ---@param str string
 ---@return string capitalizedString
 function string.capitalize(str)
-    return (str:lower():gsub("^%l", string.upper))
+    return (str:lower():gsub('^%l', string.upper))
+end
+
+--- Shortens a string to a specific length and appends a suffix
+---@param str string
+---@param length integer
+---@param suffix string
+---@return string truncatedString
+function string.truncate(str, length, suffix)
+    suffix = suffix or '...'
+    if #str <= length then
+        return str
+    end
+    return str:sub(1, length) .. suffix
 end
 
 return lib.string

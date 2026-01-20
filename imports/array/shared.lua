@@ -193,10 +193,10 @@ function lib.array:indexOf(value, last)
 end
 
 ---Executes the provided function for each element in an array.
----@param cb fun(element: unknown)
+---@param cb fun(element: unknown, index: number)
 function lib.array:forEach(cb)
     for i = 1, #self do
-        cb(self[i])
+        cb(self[i], i)
     end
 end
 

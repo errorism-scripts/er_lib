@@ -63,4 +63,53 @@ function string.random(pattern, length)
     return table.concat(arr)
 end
 
+--[[
+    Make any output with more modern pattern
+
+    const data = {
+        name = 'John',
+        secondName = 'Rose'
+    }
+    print(string.interpolate('Hello ${name}, I am ${secondName}', data))
+]]
+---@param str string
+---@param vars table<string, string>
+---@return string formattedString
+function string.interpolate(str, vars)
+    return (str:gsub('($%b{})', function(w)
+        local key = w:sub(3, -2)
+        return tostring(vars[key] or w)
+    end))
+end
+
+--- Removes leading and trailing whitespace from a string
+---@param str string
+---@return string trimmedString
+function string.trim(str)
+    return str:match('^%s*(.-)%s*$')
+end
+
+--- Checks if a string starts with the specified prefix
+---@param str string
+---@param prefix string
+---@return boolean
+function string.startsWith(str, prefix)
+    return str:sub(1, #prefix) == prefix
+end
+
+--- Checks if a string ends with the specified suffix
+---@param str string
+---@param suffix string
+---@return boolean
+function string.endsWith(str, suffix)
+    return suffix == '' or str:sub(-#suffix) == suffix
+end
+
+--- Capitalizes the first character of a string and lowers the rest
+---@param str string
+---@return string capitalizedString
+function string.capitalize(str)
+    return (str:lower():gsub("^%l", string.upper))
+end
+
 return lib.string

@@ -38,27 +38,13 @@ local function createProp(ped, prop)
   local ok, result = pcall(lib.requestModel, prop.model)
 
   if not ok then return lib.print.error(result) end
-  local coords = GetEntityCoords(ped)
-  local object = CreateObject(prop.model, coords.x, coords.y, coords.z, false, false, false)
 
-  AttachEntityToEntity(
-    object,
-    ped,
-    GetPedBoneIndex(ped, prop.bone or 60309),
-    prop.pos.x,
-    prop.pos.y,
-    prop.pos.z,
-    prop.rot.x,
-    prop.rot.y,
-    prop.rot.z,
-    true,
-    true,
-    false,
-    true,
-    prop.rotOrder or 0,
-    true
-  )
-  SetModelAsNoLongerNeeded(prop.model)
+  local coords = GetEntityCoords(ped)
+  local object = CreateObject(result, coords.x, coords.y, coords.z, false, false, false)
+
+  AttachEntityToEntity(object, ped, GetPedBoneIndex(ped, prop.bone or 60309), prop.pos.x, prop.pos.y, prop.pos.z, prop.rot.x, prop.rot.y, prop.rot.z, true,
+    true, false, true, prop.rotOrder or 0, true)
+  SetModelAsNoLongerNeeded(result)
 
   return object
 end
@@ -118,7 +104,9 @@ local function startProgress(data)
     end
   end
 
-  if data.prop then playerState:set('lib:progressProps', data.prop, true) end
+  if data.prop then
+    TriggerServerEvent('er_lib:progressProps', data.prop)
+  end
 
   local disable = data.disable
   local startTime = GetGameTimer()
@@ -159,7 +147,9 @@ local function startProgress(data)
     Wait(0)
   end
 
-  if data.prop then playerState:set('lib:progressProps', nil, true) end
+  if data.prop then
+    TriggerServerEvent('er_lib:progressProps', nil)
+  end
 
   if anim then
     if anim.dict then
@@ -246,12 +236,18 @@ if isFivem then RegisterKeyMapping('cancelprogress', locale 'cancel_progress', '
 
 local function deleteProgressProps(serverId)
   local playerProps = createdProps[serverId]
+
   if not playerProps then return end
+
+  createdProps[serverId] = nil
+
   for i = 1, #playerProps do
     local prop = playerProps[i]
-    if DoesEntityExist(prop) then DeleteEntity(prop) end
+
+    if DoesEntityExist(prop) then
+      DeleteEntity(prop)
+    end
   end
-  createdProps[serverId] = nil
 end
 
 RegisterNetEvent('onPlayerDropped', function(serverId)
@@ -267,9 +263,9 @@ AddStateBagChangeHandler('lib:progressProps', nil, function(bagName, key, value,
   local ped = GetPlayerPed(ply)
   local serverId = GetPlayerServerId(ply)
 
-  if not value then return deleteProgressProps(serverId) end
-
-  if createdProps[serverId] then deleteProgressProps(serverId) end
+  if not value or createdProps[serverId] then
+    return deleteProgressProps(serverId)
+  end
 
   local playerProps = {}
 

@@ -22,6 +22,8 @@ local input
 ---@field min? number
 ---@field max? number
 ---@field step? number
+---@field minLength? number
+---@field maxLength? number
 ---@field autosize? boolean
 ---@field required? boolean
 ---@field format? string
@@ -33,6 +35,7 @@ local input
 
 ---@class InputDialogOptionsProps
 ---@field allowCancel? boolean
+---@field size? 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 ---@param heading string
 ---@param rows string[] | InputDialogRowProps[]

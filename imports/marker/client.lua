@@ -120,6 +120,7 @@ local markerTypesMap = {
 ---@field bobUpAndDown? boolean
 ---@field faceCamera? boolean
 ---@field rotate? boolean
+---@field invert? boolean
 ---@field textureDict? string
 ---@field textureName? string
 
@@ -149,7 +150,7 @@ local function drawMarker(self)
     self.rotate,
     self.textureDict,
     self.textureName,
-    false
+    self.invert
   )
 end
 
@@ -178,6 +179,7 @@ function lib.marker.new(options)
   self.rotate = type(options.rotate) == 'boolean' and options.rotate
   self.textureDict = options.textureDict or defaultTextureDict
   self.textureName = options.textureName or defaultTextureName
+  self.invert = type(options.invert) == 'boolean' and options.invert
   self.draw = drawMarker
 
   self.width += 0.0

@@ -16,7 +16,7 @@ local skillcheck
 ---@return boolean?
 function lib.skillCheck(difficulty, inputs)
   if skillcheck then return end
-  skillcheck = promise:new()
+  skillcheck = promise.new()
 
   lib.setNuiFocus(false, true)
   SendNUIMessage {

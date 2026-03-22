@@ -91,13 +91,16 @@ function lib.getOpenContextMenu() return openContextMenu end
 function lib.hideContext(onExit) closeContext(nil, nil, onExit) end
 
 RegisterNUICallback('openContext', function(data, cb)
-    if data.back and contextMenus[openContextMenu].onBack then contextMenus[openContextMenu].onBack() end
     cb(1)
+    if not openContextMenu then return end
+    if data.back and contextMenus[openContextMenu].onBack then contextMenus[openContextMenu].onBack() end
     lib.showContext(data.id)
 end)
 
 RegisterNUICallback('clickContext', function(id, cb)
     cb(1)
+
+    if not openContextMenu then return end
 
     if math.type(tonumber(id)) == 'float' then
         id = math.tointeger(id)
@@ -105,7 +108,11 @@ RegisterNUICallback('clickContext', function(id, cb)
         id += 1
     end
 
-    local data = contextMenus[openContextMenu].options[id]
+    local menu = contextMenus[openContextMenu]
+    if not menu or not menu.options then return end
+
+    local data = menu.options[id]
+    if not data then return end
 
     if not data.event and not data.serverEvent and not data.onSelect then return end
 

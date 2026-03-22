@@ -57,27 +57,41 @@ const CircleProgressbar: React.FC = () => {
   const [label, setLabel] = React.useState('');
   const theme = useMantineTheme();
   const { classes } = useStyles({ position, duration: progressDuration });
+  const intervalRef = React.useRef<number | null>(null);
+
+  const clearProgressInterval = React.useCallback(() => {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  React.useEffect(() => {
+    return () => clearProgressInterval();
+  }, [clearProgressInterval]);
 
   useNuiEvent('progressCancel', () => {
+    clearProgressInterval();
     setValue(99);
     setVisible(false);
   });
 
   useNuiEvent<CircleProgressbarProps>('circleProgress', (data) => {
     if (visible) return;
+    clearProgressInterval();
     setVisible(true);
     setValue(0);
     setLabel(data.label || '');
     setProgressDuration(data.duration);
     setPosition(data.position || 'middle');
     const onePercent = data.duration * 0.01;
-    const updateProgress = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setValue((previousValue) => {
         const newValue = previousValue + 1;
-        newValue >= 100 && clearInterval(updateProgress);
+        if (newValue >= 100) clearProgressInterval();
         return newValue;
       });
-    }, onePercent);
+    }, onePercent) as unknown as number;
   });
 
   return (

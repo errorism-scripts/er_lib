@@ -68,7 +68,7 @@ RegisterNUICallback('closeAlert', function(data, cb)
   local promise = alert --[[@as promise]]
   alert = nil
 
-  promise:resolve(data)
+  if promise then promise:resolve(data) end
 end)
 
 RegisterNetEvent('er_lib:alertDialog', lib.alertDialog)

@@ -27,7 +27,8 @@ function lib.setValidCallback(callbackName, isValid)
 
   if callbackResource then
     if not isValid then
-      callbackResource[callbackName] = nil
+      if callbackResource ~= resourceName then return end
+      registeredCallbacks[callbackName] = nil
       return
     end
 
@@ -53,7 +54,7 @@ function lib.setValidCallback(callbackName, isValid)
 end
 
 function lib.isCallbackValid(callbackName)
-  return registeredCallbacks[callbackName] == GetInvokingResource() or cache.resource
+  return registeredCallbacks[callbackName] == (GetInvokingResource() or cache.resource)
 end
 
 local cbEvent = '__er_cb_%s'

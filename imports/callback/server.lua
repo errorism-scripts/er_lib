@@ -57,6 +57,7 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
 
   if promise then
     SetTimeout(callbackTimeout, function()
+      pendingCallbacks[key] = nil
       promise:reject(('callback event \'%s\' timed out'):format(key))
     end)
 
@@ -117,7 +118,7 @@ local pcall = pcall
 ---Registers an event handler and callback function to respond to client requests.
 ---@diagnostic disable-next-line: duplicate-set-field
 function lib.callback.register(name, cb)
-  event = cbEvent:format(name)
+  local event = cbEvent:format(name)
 
   lib.setValidCallback(name, true)
 

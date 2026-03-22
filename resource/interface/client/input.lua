@@ -87,5 +87,5 @@ RegisterNUICallback('inputData', function(data, cb)
   local promise = input
   input = nil
 
-  promise:resolve(data)
+  if promise then promise:resolve(data) end
 end)

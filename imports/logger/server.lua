@@ -264,7 +264,7 @@ if service == 'loki' then
 
         local postBody = json.encode { streams = tempBuffer }
         PerformHttpRequest(endpoint, function(status, _, _, _)
-          if status ~= 204 then badResponse(endpoint, status, ('%s'):format(status, postBody)) end
+          if status ~= 204 then badResponse(endpoint, status, postBody) end
         end, 'POST', postBody, headers)
 
         buffer = nil

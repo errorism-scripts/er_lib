@@ -11,6 +11,7 @@ local DisableControlAction = DisableControlAction
 local DisablePlayerFiring = DisablePlayerFiring
 local playerState = LocalPlayer.state
 local createdProps = {}
+local maxProps = GetConvarInt('er:progressPropLimit', GetConvarInt('ox:progressPropLimit', 2))
 
 ---@class ProgressPropProps
 ---@field model string
@@ -34,7 +35,9 @@ local createdProps = {}
 ---@field disable? { move?: boolean, sprint?: boolean, car?: boolean, combat?: boolean, mouse?: boolean }
 
 local function createProp(ped, prop)
-  lib.requestModel(prop.model)
+  local ok, result = pcall(lib.requestModel, prop.model)
+
+  if not ok then return lib.print.error(result) end
   local coords = GetEntityCoords(ped)
   local object = CreateObject(prop.model, coords.x, coords.y, coords.z, false, false, false)
 
@@ -236,7 +239,7 @@ RegisterNUICallback('progressComplete', function(data, cb)
 end)
 
 RegisterCommand('cancelprogress', function()
-  if progress?.canCancel then progress = false end
+  if progress and progress.canCancel then progress = false end
 end)
 
 if isFivem then RegisterKeyMapping('cancelprogress', locale 'cancel_progress', 'keyboard', 'x') end
@@ -266,16 +269,23 @@ AddStateBagChangeHandler('lib:progressProps', nil, function(bagName, key, value,
 
   if not value then return deleteProgressProps(serverId) end
 
-  createdProps[serverId] = {}
-  local playerProps = createdProps[serverId]
+  if createdProps[serverId] then deleteProgressProps(serverId) end
+
+  local playerProps = {}
 
   if value.model then
-    playerProps[#playerProps + 1] = createProp(ped, value)
-  else
-    for i = 1, #value do
-      local prop = value[i]
+    local prop = createProp(ped, value)
 
-      if prop then playerProps[#playerProps + 1] = createProp(ped, prop) end
+    if prop then playerProps[#playerProps + 1] = prop end
+  else
+    local propCount = math.min(maxProps, #value)
+
+    for i = 1, propCount do
+      local prop = createProp(ped, value[i])
+
+      if prop then playerProps[#playerProps + 1] = prop end
     end
   end
+
+  createdProps[serverId] = playerProps
 end)
